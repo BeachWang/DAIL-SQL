@@ -103,6 +103,10 @@ bash run_dail_sql_mini.sh [your_openai_api_key]
 
 ## Evaluation
 Please refer to the [Test Suites](https://github.com/taoyds/test-suite-sql-eval) SQL Evaluation.
+| Method    | Dev EM    | Dev EX    | Test EM   | Test EX   |
+| --------- | --------- | --------- | --------- | --------- |
+| DAIL-SQL+GPT-4    | 70.0  | 83.1  | 66.5  | 86.2  |
+| DAIL-SQL+GPT-4+Self-consistency   | 68.7  | 83.6  | 66.0  | 86.6  |
 
 ## Bibtex
 If DAIL-SQL is useful for you, please consider to cite it. Thank you! :)
