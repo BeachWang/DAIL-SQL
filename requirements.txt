@@ -1,0 +1,13 @@
+protobuf==3.20.*
+tqdm
+openai
+numpy
+transformers
+torch
+stanford-corenlp
+sql_metadata
+bpemb
+torchtext
+sentence_transformers
+attrs
+nltk
