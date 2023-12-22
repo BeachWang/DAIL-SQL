@@ -18,7 +18,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--question", type=str)
     parser.add_argument("--openai_api_key", type=str)
-    parser.add_argument("--openai_group_id", type=str, default="")
+    parser.add_argument("--openai_group_id", type=str, default="org-ktBefi7n9aK7sZjwc2R9G1Wo")
     parser.add_argument("--model", type=str, choices=[LLM.TEXT_DAVINCI_003, 
                                                       LLM.GPT_35_TURBO,
                                                       LLM.GPT_35_TURBO_0613,

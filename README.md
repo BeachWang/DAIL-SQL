@@ -20,7 +20,7 @@ For example selection, we compare different selection strategies and further ver
 Regarding example organization, we explore the option of displaying full information, solely SQL queries or question-SQL pair.
 
 Last but not least, our integrated solution, named DAIL-SQL, refreshes the Spider leaderboard with 86.6% execution accuracy, and wins the first place.
-Compared with previous solutions, DAIL-SQL encodes structure knowledge as SQL statements, selects examples based on their skeleton similarities and removes cross-domain knowledge from examples for token efficiency
+Compared with previous solutions, DAIL-SQL encodes structure knowledge as SQL statements, selects examples based on their skeleton similarities and removes cross-domain knowledge from examples for token efficiency.
 
 ## Environment Setup
 To set up the environment, you should download the [stanford-cornlp](http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip) and unzip it to the folder `./third_party`.
@@ -101,8 +101,249 @@ python ask_llm.py \
 bash run_dail_sql_mini.sh [your_openai_api_key]
 ```
 
-## Evaluation
-Please refer to the [Test Suites](https://github.com/taoyds/test-suite-sql-eval) SQL Evaluation.
+## Experiments
+
+In our works, we systematically study prompt engineering for LLM-based Text-to-SQL methods, 
+including five question representations, two prompt components, four example selections, and three example organizations on four LLMs. 
+The study sheds light on identifying suitable question representations and key points to leverage the in-context learning capacity of LLMs for Text-to-SQL task.
+We present our experimental results in the Spider train split. 
+Here, we take [Graphix](https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/graphix) as our preliminary model to pre-predict the SQL query for acquiring query similarity.
+
+### Question Representations
+we evaluate five question representations summarized from other works under zero-shot scenario, 
+employing four LLMs: GPT-4, GPT-3.5-TURBO, TEXT-DAVINCI-003, and Vicuna-33B. We find Code Representation Prompt and OpenAI Demostration Prompt are preferred.
+<br>
+<div align="left"><img width="40%" src="img/openai_0shot_em.pdf"><img width="40%" src="img/openai_0shot_em.pdf"></div>
+<br>
+We also investigate the impact of foreign key and "with no explanation" rule implication. Both the foreign key and the "with no explanation" rule implication
+are beneficial for Text-to-SQL task.
+<br>
+<div align="left"><img width="40%" src="img/component_foreign_key_em.pdf"><img width="40%" src="img/component_foreign_key_ex.pdf"></div>
+<div align="left"><img width="40%" src="img/component_explanation_em.pdf"><img width="40%" src="img/component_explanation_ex.pdf"></div>
+<br>
+
+### Example Selections
+
+We then study the effects of different example selections under few-shot scenario. 
+We emphasize the importance to consider both question similarity and query similarity as DAIL-SQL does in example selection.
+
+<table>
+    <tr>
+        <td rowspan="2">Few-shot</td>
+        <td rowspan="2">Selection</td>
+        <td rowspan="2">Question<br>Similarity</td>
+        <td rowspan="2">Query<br>Similarity</td>
+        <td colspan="2">GPT-4</td>
+        <td colspan="2">GPT-3.5-TURBO</td>
+        <td colspan="2">TEXT-DAVINCI-003</td>
+        <td colspan="2">Vicuna-33B</td>
+    </tr>
+    <tr>
+        <td> EM </td>
+        <td> EX </td>
+        <td> EM </td>
+        <td> EX </td>
+        <td> EM </td>
+        <td> EX </td>
+        <td> EM </td>
+        <td> EX </td>
+    </tr>
+    <tr>
+        <td> 0-shot </td>
+        <td> - </td>
+        <td> - </td>
+        <td> - </td>
+        <td> 22.1 </td>
+        <td> 72.3 </td>
+        <td> 34.6 </td>
+        <td> 74.4 </td>
+        <td> 31.7 </td>
+        <td> 71.7 </td>
+        <td> 6.9 </td>
+        <td> 43.7 </td>
+    </tr>
+    <tr>
+        <td rowspan="4"> 1-shot </td>
+        <td> Random </td>
+        <td> 0.23 </td>
+        <td> 0.47 </td>
+        <td> 41.7 </td>
+        <td> 77.4 </td>
+        <td> 45.9 </td>
+        <td> 73.9 </td>
+        <td> 38.2 </td>
+        <td> 70.6 </td>
+        <td> 14.4 </td>
+        <td> 47.9 </td>
+    </tr>
+    <tr>
+        <td> Question Similarity Selection </td>
+        <td> 0.39 </td>
+        <td> 0.65 </td>
+        <td> 53.3 </td>
+        <td> 78.8 </td>
+        <td> 51.9 </td>
+        <td> 74.3 </td>
+        <td> 44.1 </td>
+        <td> 72.3 </td>
+        <td> 16.5 </td>
+        <td> 48.5 </td>
+    </tr>
+    <tr>
+        <td> Masked Question Similarity Selection </td>
+        <td> 0.57 </td>
+        <td> 0.80 </td>
+        <td> 58.2 </td>
+        <td> 79.1 </td>
+        <td> 57.4 </td>
+        <td> 76.0 </td>
+        <td> 47.9 </td>
+        <td> 75.0 </td>
+        <td> 21.4 </td>
+        <td> 48.7 </td>
+    </tr>
+    <tr>
+        <td> DAIL Selection </td>
+        <td> 0.56 </td>
+        <td> 0.95 </td>
+        <td> 62.1 </td>
+        <td> 80.2 </td>
+        <td> 59.5 </td>
+        <td> 75.5 </td>
+        <td> 51.9 </td>
+        <td> 76.9 </td>
+        <td> 22.8 </td>
+        <td> 49.2 </td>
+    </tr>
+    <tr>
+        <td rowspan="4"> 3-shot </td>
+        <td> Random </td>
+        <td> 0.23 </td>
+        <td> 0.48 </td>
+        <td> 48.9 </td>
+        <td> 79.4 </td>
+        <td> 49.0 </td>
+        <td> 73.6 </td>
+        <td> 41.7 </td>
+        <td> 71.6 </td>
+        <td> 16.8 </td>
+        <td> 46.9 </td>
+    </tr>
+    <tr>
+        <td> Question Similarity Selection </td>
+        <td> 0.37 </td>
+        <td> 0.63 </td>
+        <td> 56.3 </td>
+        <td> 79.2 </td>
+        <td> 53.8 </td>
+        <td> 74.7 </td>
+        <td> 52.2 </td>
+        <td> 74.1 </td>
+        <td> 21.1 </td>
+        <td> 47.1 </td>
+    </tr>
+    <tr>
+        <td> Masked Question Similarity Selection </td>
+        <td> 0.54 </td>
+        <td> 0.78 </td>
+        <td> 66.1 </td>
+        <td> 81.5 </td>
+        <td> 61.1 </td>
+        <td> 77.3 </td>
+        <td> 59.7 </td>
+        <td> 77.0 </td>
+        <td> 27.7 </td>
+        <td> 52.3 </td>
+    </tr>
+    <tr>
+        <td> DAIL Selection </td>
+        <td> 0.53 </td>
+        <td> 0.94 </td>
+        <td> 69.1 </td>
+        <td> 81.7 </td>
+        <td> 63.9 </td>
+        <td> 77.8 </td>
+        <td> 64.4 </td>
+        <td> 79.5 </td>
+        <td> 30.7 </td>
+        <td> 53.6 </td>
+    </tr>
+    <tr>
+        <td rowspan="4"> 5-shot </td>
+        <td> Random </td>
+        <td> 0.23 </td>
+        <td> 0.48 </td>
+        <td> 51.6 </td>
+        <td> 79.5 </td>
+        <td> 52.9 </td>
+        <td> 75.7 </td>
+        <td> 49.0 </td>
+        <td> 72.1 </td>
+        <td> - </td>
+        <td> - </td>
+    </tr>
+    <tr>
+        <td> Question Similarity Selection </td>
+        <td> 0.36 </td>
+        <td> 0.61 </td>
+        <td> 58.2 </td>
+        <td> 79.9 </td>
+        <td> 55.9 </td>
+        <td> 75.1 </td>
+        <td> 54.8 </td>
+        <td> 73.2 </td>
+        <td> - </td>
+        <td> - </td>
+    </tr>
+    <tr>
+        <td> Masked Question Similarity Selection </td>
+        <td> 0.52 </td>
+        <td> 0.77 </td>
+        <td> 66.8 </td>
+        <td> 82.0 </td>
+        <td> 62.3 </td>
+        <td> 77.9 </td>
+        <td> 64.7 </td>
+        <td> 78.6 </td>
+        <td> - </td>
+        <td> - </td>
+    </tr>
+    <tr>
+        <td> DAIL Selection </td>
+        <td> 0.52 </td>
+        <td> 0.94 </td>
+        <td> 71.9 </td>
+        <td> 82.4 </td>
+        <td> 66.7 </td>
+        <td> 78.1 </td>
+        <td> 67.7 </td>
+        <td> 80.5 </td>
+        <td> - </td>
+        <td> - </td>
+    </tr>
+
+</table>
+
+### Example Organizations
+
+Finally, we study the example organizations. In DAIL-SQL, we omit the token-cost database schema in examples, 
+and just show the question and query pairs to LLMs. As comparisons, we compare the organization of DAIL-SQL with 
+Full-Information and SQL-Only organizations. DAIL organization is an effective and efficient organization 
+for potent LLMs.
+
+<table>
+    <tr>
+        <td align="center"><img width="24%" src="img/organization_spider_dev_gpt4.pdf"><br /><b>GPT-4</b></td>
+        <td align="center"><img width="24%" src="img/organization_spider_dev_chatgpt.pdf"><br /><b>GPT-3.5-TURBO</b></td>
+        <td align="center"><img width="24%" src="img/organization_spider_dev_davinci.pdf"><br /><b>TEXT-DAVINCI-003</b></td>
+        <td align="center"><img width="24%" src="img/organization_spider_dev_vicuna.pdf"><br /><b>Vicuna-33B</b></td>
+    </tr>
+</table>
+
+## Evaluation of DAIL-SQL
+In evaluation, we take GPT-4 itself as the preliminary model for acquiring query similarity. 
+The commands are shown in `run_dail_sql.sh` and `run_dail_sql_with_sc.sh`.
+Please refer to the [Test Suites](https://github.com/taoyds/test-suite-sql-eval) SQL Evaluation Metrics.
 | Method    | Dev EM    | Dev EX    | Test EM   | Test EX   |
 | --------- | --------- | --------- | --------- | --------- |
 | DAIL-SQL+GPT-4    | 70.0  | 83.1  | 66.5  | 86.2  |

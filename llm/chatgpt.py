@@ -11,6 +11,8 @@ def init_chatgpt(OPENAI_API_KEY, OPENAI_GROUP_ID, model):
         dashscope.api_key = OPENAI_API_KEY
     else:
         openai.api_key = OPENAI_API_KEY
+        # openai.organization = "org-cg0wrk96vkCzqVXIkrKKHCai"
+        # openai.organization = "org-ktBefi7n9aK7sZjwc2R9G1Wo"
         openai.organization = OPENAI_GROUP_ID
 
 
