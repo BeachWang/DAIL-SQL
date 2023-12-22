@@ -333,10 +333,12 @@ for potent LLMs.
 
 <table>
     <tr>
-        <td align="center"><img width="24%" src="img/organization_spider_dev_gpt4.png"><br /><b>GPT-4</b></td>
-        <td align="center"><img width="24%" src="img/organization_spider_dev_chatgpt.png"><br /><b>GPT-3.5-TURBO</b></td>
-        <td align="center"><img width="24%" src="img/organization_spider_dev_davinci.png"><br /><b>TEXT-DAVINCI-003</b></td>
-        <td align="center"><img width="24%" src="img/organization_spider_dev_vicuna.png"><br /><b>Vicuna-33B</b></td>
+        <td align="center"><img width="80%" src="img/organization_spider_dev_gpt4.png"><br />GPT-4</td>
+        <td align="center"><img width="80%" src="img/organization_spider_dev_chatgpt.png"><br />GPT-3.5-TURBO</td>
+    </tr>
+    <tr>
+        <td align="center"><img width="80%" src="img/organization_spider_dev_davinci.png"><br />TEXT-DAVINCI-003</td>
+        <td align="center"><img width="80%" src="img/organization_spider_dev_vicuna.png"><br />Vicuna-33B</td>
     </tr>
 </table>
 
