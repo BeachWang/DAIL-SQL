@@ -107,10 +107,11 @@ In our works, we systematically study prompt engineering for LLM-based Text-to-S
 including five question representations, two prompt components, four example selections, and three example organizations on four LLMs. 
 The study sheds light on identifying suitable question representations and key points to leverage the in-context learning capacity of LLMs for Text-to-SQL task.
 We present our experimental results in the Spider train split. 
-Here, we take [Graphix](https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/graphix) as our preliminary model to pre-predict the SQL query for acquiring query similarity.
+Here, we take [Graphix](https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main/graphix) as our preliminary model to pre-generate the SQL query for acquiring query similarity.
+Please refer to the [Test Suites](https://github.com/taoyds/test-suite-sql-eval) for evaluation metrics.
 
 ### Question Representations
-we evaluate five question representations summarized from other works under zero-shot scenario, 
+We evaluate five question representations summarized from other works under zero-shot scenario, 
 employing four LLMs: GPT-4, GPT-3.5-TURBO, TEXT-DAVINCI-003, and Vicuna-33B. We find Code Representation Prompt and OpenAI Demostration Prompt are preferred.
 <br>
 <div align="center"><img width="45%" src="img/openai_0shot_em.png"><img width="45%" src="img/openai_0shot_em.png"></div>
@@ -326,10 +327,10 @@ We emphasize the importance to consider both question similarity and query simil
 
 ### Example Organizations
 
-Finally, we study the example organizations. In DAIL-SQL, we omit the token-cost database schema in examples, 
-and just show the question and query pairs to LLMs. As comparisons, we compare the organization of DAIL-SQL with 
-Full-Information and SQL-Only organizations. DAIL organization is an effective and efficient organization 
-for potent LLMs.
+Finally, we examine example organizations in DAIL-SQL, 
+excluding the token-cost database schema in the examples and only presenting question and query pairs to LLMs. 
+In our analysis, we contrast the DAIL-SQL organization with both Full-Information and SQL-Only organizations, 
+finding that the DAIL organization is a highly effective and efficient approach for potent LLMs.
 
 <table>
     <tr>
@@ -345,7 +346,6 @@ for potent LLMs.
 ## Evaluation of DAIL-SQL
 In evaluation, we take GPT-4 itself as the preliminary model for acquiring query similarity. 
 The commands are shown in `run_dail_sql.sh` and `run_dail_sql_with_sc.sh`.
-Please refer to the [Test Suites](https://github.com/taoyds/test-suite-sql-eval) SQL Evaluation Metrics.
 | Method    | Dev EM    | Dev EX    | Test EM   | Test EX   |
 | --------- | --------- | --------- | --------- | --------- |
 | DAIL-SQL+GPT-4    | 70.0  | 83.1  | 66.5  | 86.2  |
