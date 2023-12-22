@@ -113,13 +113,13 @@ Here, we take [Graphix](https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main
 we evaluate five question representations summarized from other works under zero-shot scenario, 
 employing four LLMs: GPT-4, GPT-3.5-TURBO, TEXT-DAVINCI-003, and Vicuna-33B. We find Code Representation Prompt and OpenAI Demostration Prompt are preferred.
 <br>
-<div align="left"><img width="40%" src="img/openai_0shot_em.pdf"><img width="40%" src="img/openai_0shot_em.pdf"></div>
+<div align="left"><img width="40%" src="img/openai_0shot_em.png"><img width="40%" src="img/openai_0shot_em.png"></div>
 <br>
 We also investigate the impact of foreign key and "with no explanation" rule implication. Both the foreign key and the "with no explanation" rule implication
 are beneficial for Text-to-SQL task.
 <br>
-<div align="left"><img width="40%" src="img/component_foreign_key_em.pdf"><img width="40%" src="img/component_foreign_key_ex.pdf"></div>
-<div align="left"><img width="40%" src="img/component_explanation_em.png"><img width="40%" src="img/component_explanation_ex.pdf"></div>
+<div align="left"><img width="40%" src="img/component_foreign_key_em.png"><img width="40%" src="img/component_foreign_key_ex.png"></div>
+<div align="left"><img width="40%" src="img/component_explanation_em.png"><img width="40%" src="img/component_explanation_ex.png"></div>
 <br>
 
 ### Example Selections
@@ -333,10 +333,10 @@ for potent LLMs.
 
 <table>
     <tr>
-        <td align="center"><img width="24%" src="img/organization_spider_dev_gpt4.pdf"><br /><b>GPT-4</b></td>
-        <td align="center"><img width="24%" src="img/organization_spider_dev_chatgpt.pdf"><br /><b>GPT-3.5-TURBO</b></td>
-        <td align="center"><img width="24%" src="img/organization_spider_dev_davinci.pdf"><br /><b>TEXT-DAVINCI-003</b></td>
-        <td align="center"><img width="24%" src="img/organization_spider_dev_vicuna.pdf"><br /><b>Vicuna-33B</b></td>
+        <td align="center"><img width="24%" src="img/organization_spider_dev_gpt4.png"><br /><b>GPT-4</b></td>
+        <td align="center"><img width="24%" src="img/organization_spider_dev_chatgpt.png"><br /><b>GPT-3.5-TURBO</b></td>
+        <td align="center"><img width="24%" src="img/organization_spider_dev_davinci.png"><br /><b>TEXT-DAVINCI-003</b></td>
+        <td align="center"><img width="24%" src="img/organization_spider_dev_vicuna.png"><br /><b>Vicuna-33B</b></td>
     </tr>
 </table>
 
