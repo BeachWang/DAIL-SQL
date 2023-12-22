@@ -119,7 +119,7 @@ We also investigate the impact of foreign key and "with no explanation" rule imp
 are beneficial for Text-to-SQL task.
 <br>
 <div align="left"><img width="40%" src="img/component_foreign_key_em.pdf"><img width="40%" src="img/component_foreign_key_ex.pdf"></div>
-<div align="left"><img width="40%" src="img/component_explanation_em.pdf"><img width="40%" src="img/component_explanation_ex.pdf"></div>
+<div align="left"><img width="40%" src="img_pdf/component_explanation_em.png"><img width="40%" src="img/component_explanation_ex.pdf"></div>
 <br>
 
 ### Example Selections
