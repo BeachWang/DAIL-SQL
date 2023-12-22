@@ -113,13 +113,13 @@ Here, we take [Graphix](https://github.com/AlibabaResearch/DAMO-ConvAI/tree/main
 we evaluate five question representations summarized from other works under zero-shot scenario, 
 employing four LLMs: GPT-4, GPT-3.5-TURBO, TEXT-DAVINCI-003, and Vicuna-33B. We find Code Representation Prompt and OpenAI Demostration Prompt are preferred.
 <br>
-<div align="left"><img width="40%" src="img/openai_0shot_em.png"><img width="40%" src="img/openai_0shot_em.png"></div>
+<div align="center"><img width="45%" src="img/openai_0shot_em.png"><img width="45%" src="img/openai_0shot_em.png"></div>
 <br>
 We also investigate the impact of foreign key and "with no explanation" rule implication. Both the foreign key and the "with no explanation" rule implication
 are beneficial for Text-to-SQL task.
 <br>
-<div align="left"><img width="40%" src="img/component_foreign_key_em.png"><img width="40%" src="img/component_foreign_key_ex.png"></div>
-<div align="left"><img width="40%" src="img/component_explanation_em.png"><img width="40%" src="img/component_explanation_ex.png"></div>
+<div align="center"><img width="45%" src="img/component_foreign_key_em.png"><img width="45%" src="img/component_foreign_key_ex.png"></div>
+<div align="center"><img width="45%" src="img/component_explanation_em.png"><img width="45%" src="img/component_explanation_ex.png"></div>
 <br>
 
 ### Example Selections
