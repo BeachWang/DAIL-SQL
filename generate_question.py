@@ -18,7 +18,7 @@ sys.path.append("./")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_type", type=str, choices=["kaggle-dbqa", "spider", "realistic"], default="spider")
+    parser.add_argument("--data_type", type=str, choices=["spider", "realistic", "bird"], default="spider")
     parser.add_argument("--split", type=str, choices=["train", "test"], default="test",  required=True)
     parser.add_argument("--k_shot", type=int, default=0, help="Number of examples")
     parser.add_argument("--prompt_repr", type=str, choices=[REPR_TYPE.CODE_REPRESENTATION,

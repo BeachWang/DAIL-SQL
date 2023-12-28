@@ -33,8 +33,13 @@ class BasicDataset(object):
     def get_databases(self):
         if self.databases is None:
             self.databases = dict()
-            for db_id in os.listdir(self.path_db):
-                self.databases[db_id] = self.get_tables(db_id)
+            # for db_id in os.listdir(self.path_db):
+            #     self.databases[db_id] = self.get_tables(db_id)
+            with open(self.table_json) as f:
+                tables = json.load(f)
+                for tj in tables:
+                    db_id = tj["db_id"]
+                    self.databases[db_id] = self.get_tables(db_id)
         return self.databases
 
     def get_tables(self, db_id):
@@ -178,7 +183,10 @@ class BasicDataset(object):
         for data in datas:
             db_id = data["db_id"]
             data["tables"] = self.get_tables(db_id)
-            data["query_skeleton"] = sql2skeleton(data["query"], db_id_to_table_json[db_id])
+            if data["query"].strip()[:6] != 'SELECT':
+                data["query_skeleton"] = data["query"]
+            else:
+                data["query_skeleton"] = sql2skeleton(data["query"], db_id_to_table_json[db_id])
             data["path_db"] = self.get_path_db(db_id)
         if linking_infos:
             db_id_to_table_json = dict()
@@ -220,11 +228,22 @@ class RealisticDataset(BasicDataset):
     table_json = "tables.json"
     mini_test_index_json = None
 
+class BirdDataset(BasicDataset):
+    name = "bird"
+    test_json = "dev.json"
+    test_gold = "dev.sql"
+    train_json = "train.json"
+    train_gold = "train_gold.sql"
+    table_json = "tables.json"
+    mini_test_index_json = None
+
 
 def load_data(data_type, path_data, pre_test_result=None):
     if data_type.lower() == "spider":
         return SpiderDataset(path_data, pre_test_result)
     elif data_type.lower() == "realistic":
         return RealisticDataset(path_data, pre_test_result)
+    elif data_type.lower() == "bird":
+        return BirdDataset(path_data, pre_test_result)
     else:
         raise RuntimeError()

@@ -135,8 +135,13 @@ def load_tables(paths):
 
             for column_id in schema_dict['primary_keys']:
                 # Register primary keys
-                column = columns[column_id]
-                column.table.primary_keys.append(column)
+                if isinstance(column_id, list):
+                    for each_id in column_id:
+                        column = columns[each_id]
+                        column.table.primary_keys.append(column)
+                else:
+                    column = columns[column_id]
+                    column.table.primary_keys.append(column)
 
             foreign_key_graph = nx.DiGraph()
             for source_column_id, dest_column_id in schema_dict['foreign_keys']:
@@ -156,7 +161,7 @@ def load_tables(paths):
             db_id = schema_dict['db_id']
             assert db_id not in schemas
             schemas[db_id] = Schema(db_id, tables, columns, foreign_key_graph, schema_dict)
-            eval_foreign_key_maps[db_id] = build_foreign_key_map(schema_dict)
+            # eval_foreign_key_maps[db_id] = build_foreign_key_map(schema_dict)
 
     return schemas, eval_foreign_key_maps
 

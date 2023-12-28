@@ -30,7 +30,7 @@ def get_tables(path_db):
     res = list()
     for table_name in table_names:
         # schema
-        schema = [_[1] for _ in cur.execute(f"PRAGMA table_info({table_name})")]
+        schema = [_[1] for _ in cur.execute(f'PRAGMA table_info("{table_name}")')]
 
         # data
         data = None
@@ -109,13 +109,13 @@ def format_foreign_key(table_name: str, res: list):
 
 
 def get_foreign_key(table_name, path_db=None, cur=None):
-    res_raw = execute_query(f"PRAGMA foreign_key_list({table_name})", path_db, cur)
+    res_raw = execute_query(f'PRAGMA foreign_key_list("{table_name}")', path_db, cur)
     res = format_foreign_key(table_name, res_raw)
     return res
 
 
 def get_primary_key(table_name, path_db=None, cur=None):
-    res_raw = execute_query(f'PRAGMA table_info({table_name})', path_db, cur)
+    res_raw = execute_query(f'PRAGMA table_info("{table_name}")', path_db, cur)
     pks = list()
     for row in res_raw:
         if row[5] == 1:
