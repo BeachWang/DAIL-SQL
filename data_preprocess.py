@@ -106,33 +106,35 @@ def bird_pre_process(bird_dir, with_evidence=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_dir", type=str, default="./dataset/spider")
+    parser.add_argument("--data_type", type=str, choices=["spider", "bird"], default="spider")
     args = parser.parse_args()
 
-    # merge two training split of Spider
-    spider_dir = args.data_dir
-    split1 = "train_spider.json"
-    split2 = "train_others.json"
-    total_train = []
-    for item in json.load(open(os.path.join(spider_dir, split1))):
-        total_train.append(item)
-    for item in json.load(open(os.path.join(spider_dir, split2))):
-        total_train.append(item)
-    with open(os.path.join(spider_dir, 'train_spider_and_others.json'), 'w') as f:
-        json.dump(total_train, f)
+    if data_type == "spider":
+        # merge two training split of Spider
+        spider_dir = args.data_dir
+        split1 = "train_spider.json"
+        split2 = "train_others.json"
+        total_train = []
+        for item in json.load(open(os.path.join(spider_dir, split1))):
+            total_train.append(item)
+        for item in json.load(open(os.path.join(spider_dir, split2))):
+            total_train.append(item)
+        with open(os.path.join(spider_dir, 'train_spider_and_others.json'), 'w') as f:
+            json.dump(total_train, f)
 
-    # schema-linking between questions and databases for Spider
-    spider_dev = "dev.json"
-    spider_train = 'train_spider_and_others.json'
-    spider_table = 'tables.json'
-    spider_db = 'database'
-    schema_linking_producer(spider_dev, spider_train, spider_table, spider_db, spider_dir)
-
-    # schema-linking for bird with evidence
-    bird_dir = './dataset/raw_data/bird'
-    bird_pre_process(bird_dir, with_evidence=True)
-    bird_dev = 'dev.json'
-    bird_train = 'train.json'
-    bird_table = 'tables.json'
-    bird_db = 'databases'
-    ## do not compute the cv_link since it is time-consuming in the huge database in BIRD
-    schema_linking_producer(bird_dev, bird_train, bird_table, bird_db, bird_dir, compute_cv_link=False)
+        # schema-linking between questions and databases for Spider
+        spider_dev = "dev.json"
+        spider_train = 'train_spider_and_others.json'
+        spider_table = 'tables.json'
+        spider_db = 'database'
+        schema_linking_producer(spider_dev, spider_train, spider_table, spider_db, spider_dir)
+    elif data_type == "bird":
+        # schema-linking for bird with evidence
+        bird_dir = './dataset/bird'
+        bird_pre_process(bird_dir, with_evidence=True)
+        bird_dev = 'dev.json'
+        bird_train = 'train.json'
+        bird_table = 'tables.json'
+        bird_db = 'databases'
+        ## do not compute the cv_link since it is time-consuming in the huge database in BIRD
+        schema_linking_producer(bird_dev, bird_train, bird_table, bird_db, bird_dir, compute_cv_link=False)

@@ -3,7 +3,7 @@ import json
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--dail_output", type=str, default=None)
-    parser.add_argument("--bird_dev", type=str, default="dataset/raw_data/bird/dev/dev.json")
+    parser.add_argument("--bird_dev", type=str, default="dataset/bird/dev/dev.json")
     args = parser.parse_args()
     queries = []
     with open(args.dail_output) as f:
@@ -23,4 +23,3 @@ if __name__ == '__main__':
     out_file = args.dail_output.replace(".txt", ".json")
     with open(out_file, "w") as f:
         json.dump(bird_output, f, indent = 4)
-        
