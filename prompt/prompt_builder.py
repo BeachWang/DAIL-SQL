@@ -8,39 +8,39 @@ from prompt.PromptICLTemplate import BasicICLPrompt
 
 
 def get_repr_cls(repr_type: str):
-    if repr_type == REPR_TYPE.SQL:
+    if repr_type == REPR_TYPE.CODE_REPRESENTATION:
         repr_cls = SQLPrompt
-    elif repr_type == REPR_TYPE.TEXT:
+    elif repr_type == REPR_TYPE.TEXT_REPRESENTATION:
         repr_cls = TextPrompt
-    elif repr_type == REPR_TYPE().NUMBER_SIGN:
+    elif repr_type == REPR_TYPE.OPENAI_DEMOSTRATION:
         repr_cls = NumberSignPrompt
-    elif repr_type == REPR_TYPE.BASELINE:
+    elif repr_type == REPR_TYPE.BASIC:
         repr_cls = BaselinePrompt
-    elif repr_type == REPR_TYPE.INSTRUCTION:
+    elif repr_type == REPR_TYPE.ALPACA_SFT:
         repr_cls = InstructionPrompt
-    elif repr_type == REPR_TYPE.NUMBER_SIGN_WFK:
+    elif repr_type == REPR_TYPE.OPENAI_DEMOSTRATION_WFK:
         repr_cls = NumberSignWithForeignKeyPrompt
-    elif repr_type == REPR_TYPE.BASELINE_WOFK:
+    elif repr_type == REPR_TYPE.BASIC_WOFK:
         repr_cls = BaselineWithoutForeignKeyPrompt
-    elif repr_type == REPR_TYPE.TEXT_WFK:
+    elif repr_type == REPR_TYPE.TEXT_REPRESENTATION_WFK:
         repr_cls = TextWithForeignKeyPrompt
-    elif repr_type == REPR_TYPE.INSTRUCTION_WFK:
+    elif repr_type == REPR_TYPE.ALPACA_SFT_WFK:
         repr_cls = InstructionWithForeignKeyPrompt
-    elif repr_type == REPR_TYPE.NUMBER_SIGN_WORULE:
+    elif repr_type == REPR_TYPE.OPENAI_DEMOSTRATION_WORULE:
         repr_cls = NumberSignWithoutRulePrompt
-    elif repr_type == REPR_TYPE.SQL_WRULE:
+    elif repr_type == REPR_TYPE.CODE_REPRESENTATION_WRULE:
         repr_cls = SQLWithRulePrompt
-    elif repr_type == REPR_TYPE.INSTRUCTION_WRULE:
+    elif repr_type == REPR_TYPE.ALPACA_SFT_WRULE:
         repr_cls = InstructionWithRulePrompt
-    elif repr_type == REPR_TYPE.TEXT_WRULE:
+    elif repr_type == REPR_TYPE.TEXT_REPRESENTATION_WRULE:
         repr_cls = TextWithRulePrompt
-    elif repr_type == REPR_TYPE.SQL_COT:
+    elif repr_type == REPR_TYPE.CODE_REPRESENTATION_COT:
         repr_cls = SQLCOTPrompt
-    elif repr_type == REPR_TYPE.TEXT_COT:
+    elif repr_type == REPR_TYPE.TEXT_REPRESENTATION_COT:
         repr_cls = TextCOTPrompt
-    elif repr_type == REPR_TYPE.NUMBER_SIGN_COT:
+    elif repr_type == REPR_TYPE.OPENAI_DEMOSTRATION_COT:
         repr_cls = NumberSignCOTPrompt
-    elif repr_type == REPR_TYPE.INSTRUCTION_COT:
+    elif repr_type == REPR_TYPE.ALPACA_SFT_COT:
         repr_cls = InstructionCOTPrompt
     elif repr_type == REPR_TYPE.CBR:
         repr_cls = CBRPrompt
@@ -58,9 +58,9 @@ def get_example_format_cls(example_format: str):
         example_format_cls = QuestionSqlWithRuleExampleStyle
     elif example_format == EXAMPLE_TYPE.COMPLETE:
         example_format_cls = CompleteExampleStyle
-    elif example_format == EXAMPLE_TYPE.NUMBER_SIGN_QA:
+    elif example_format == EXAMPLE_TYPE.OPENAI_DEMOSTRATION_QA:
         example_format_cls = NumberSignQuestionSqlExampleStyle
-    elif example_format == EXAMPLE_TYPE.BASELINE_QA:
+    elif example_format == EXAMPLE_TYPE.BASIC_QA:
         example_format_cls = BaselineQuestionSqlExampleStyle
     else:
         raise ValueError(f"{example_format} is not supported yet!")
