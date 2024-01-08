@@ -86,4 +86,4 @@ class LLM:
     # local LLMs
     LLAMA_7B = "llama-7b"
     ALPACA_7B = "alpaca-7b"
-    TONG_YI_QIAN_WEN = "qwen-v1"
+    # TONG_YI_QIAN_WEN = "qwen-v1"

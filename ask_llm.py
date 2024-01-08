@@ -22,7 +22,7 @@ if __name__ == '__main__':
     parser.add_argument("--model", type=str, choices=[LLM.TEXT_DAVINCI_003, 
                                                       LLM.GPT_35_TURBO,
                                                       LLM.GPT_35_TURBO_0613,
-                                                      LLM.TONG_YI_QIAN_WEN,
+                                                      # LLM.TONG_YI_QIAN_WEN,
                                                       LLM.GPT_35_TURBO_16K,
                                                       LLM.GPT_4],
                         default=LLM.GPT_35_TURBO)
