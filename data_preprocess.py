@@ -109,6 +109,7 @@ if __name__ == '__main__':
     parser.add_argument("--data_type", type=str, choices=["spider", "bird"], default="spider")
     args = parser.parse_args()
 
+    data_type = args.data_type
     if data_type == "spider":
         # merge two training split of Spider
         spider_dir = args.data_dir
