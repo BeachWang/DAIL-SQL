@@ -15,7 +15,7 @@ python generate_question.py --data_type bird --split test --tokenizer gpt-3.5-tu
 --pre_test_result ./dataset/process/BIRD-TEST_SQL_7-SHOT_EUCDISQUESTIONMASK_QA-EXAMPLE_CTX-200_ANS-4096/RESULTS_MODEL-gpt-4.txt
 
 
-python 02_ask_chatgpt.py \
+python ask_llm.py \
 --openai_api_key $1 \
 --model gpt-4 \
 --question ./dataset/process/BIRD-TEST_SQL_7-SHOT_EUCDISMASKPRESKLSIMTHR_QA-EXAMPLE_CTX-200_ANS-4096/ \
